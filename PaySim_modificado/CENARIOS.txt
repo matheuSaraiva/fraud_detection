@@ -1,0 +1,32 @@
+#PaySim parameters
+seed=time
+nbSteps=1000
+multiplier=0.5
+nbClients=50
+nbFraudsters=50
+nbMerchants=500
+nbBanks=5
+fraudProbability=0.01
+transferLimit=50000
+
+#PaySim parameters
+seed=time
+nbSteps=5000
+multiplier=0.5
+nbClients=10
+nbFraudsters=45
+nbMerchants=45
+nbBanks=10
+fraudProbability=0.05
+transferLimit=100000
+
+#PaySim parameters
+seed=time
+nbSteps=10000
+multiplier=1
+nbClients=15
+nbFraudsters=100
+nbMerchants=100
+nbBanks=2
+fraudProbability=0.001
+transferLimit=200000000
