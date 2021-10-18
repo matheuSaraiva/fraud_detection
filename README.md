@@ -4,11 +4,12 @@ Neste repositório se encontram todos os códigos, banco de dados e análises re
 
 ## Estrutura
 
-A execução deste projeto é dada através do arquivo *results.py*, que por sua vez carrega e executa os seguintes scrips em python:
+A execução deste projeto é dada através do arquivo *results.py*, que por sua vez carrega e executa os seguintes scrips em python, contidos no diretório "/modelling/":
 - **pre_process.py**: Rotina criada para o tratamento de dados amostrais e separação dos mesmos em cojuntos de treino e de teste.
 - **fit_models.py**: Rotina criada para ajustar modelos e gerar os resultados referentes aos seus desempenhos em predição, sob as métricas de AUC, Acurácia Balanceada, F1-score e F2-score. 
 - **run.py**: Este script carrega e executa os scripts anteriores em um conjunto de amostras. Parte deste script carrega parâmetros de modelos já hiperparametrizados, que se encontram no diretório "/Hiperparametrizados/".
-- **results.py**: Este é o script pricipal, responsável pela integração dos demais scripts e parametrização. Durante sua execução uma tabela em formato .csv é gerada, permintindo análises dos resultados parciais enquanto todo o conjunto de amostras ainda não foi finalizado. Ao fim de sua execução, uma tabela final em formato .csv é gerada com todos os resultados de todos os modelos em todas as amostras; armazeanada no diretório "/Resultados/".
+
+O scrip *results.py* é o script pricipal, responsável pela integração dos demais scripts e parametrização. Durante sua execução uma tabela em formato .csv é gerada, permintindo análises dos resultados parciais enquanto todo o conjunto de amostras ainda não foi finalizado. Ao fim de sua execução, uma tabela final em formato .csv é gerada com todos os resultados de todos os modelos em todas as amostras; armazeanada no diretório "/Resultados/".
 
 ## Dados
 
