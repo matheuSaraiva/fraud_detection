@@ -2,15 +2,6 @@
 
 Neste repositório se encontram todos os códigos, banco de dados e análises realizadas referentes ao desenvolvimento da metodologia e dos resultados de minha dissertação de mestrado.
 
-## Estrutura
-
-A execução deste projeto é dada através do arquivo *results.py*, que por sua vez carrega e executa os seguintes scrips em python, contidos no diretório "/modelling/":
-- **pre_process.py**: Rotina criada para o tratamento de dados amostrais e separação dos mesmos em cojuntos de treino e de teste.
-- **fit_models.py**: Rotina criada para ajustar modelos e gerar os resultados referentes aos seus desempenhos em predição, sob as métricas de AUC, Acurácia Balanceada, F1-score e F2-score. 
-- **run.py**: Este script carrega e executa os scripts anteriores em um conjunto de amostras. Parte deste script carrega parâmetros de modelos já hiperparametrizados, que se encontram no diretório "/Hiperparametrizados/".
-
-O scrip *results.py* é o script pricipal, responsável pela integração dos demais scripts e parametrização. Durante sua execução uma tabela em formato .csv é gerada, permintindo análises dos resultados parciais enquanto todo o conjunto de amostras ainda não foi finalizado. Ao fim de sua execução, uma tabela final em formato .csv é gerada com todos os resultados de todos os modelos em todas as amostras; armazeanada no diretório "/Resultados/".
-
 ## Dados
 
 Os dados utilizados neste repositório são dados artificiais gerados pelo simulador AMLSim, [disponível aqui](https://github.com/IBM/AMLSim). A partir de diferentes parametrizações 3 cenários foram gerados, cada um com 1.000 amostras:
@@ -33,6 +24,15 @@ os modelos utilizados neste projeto são:
 - Sistemas Baseados em Regras Fuzzy (SBRF)
 
 Os ajustes, predições e avaliações de desempenho de todos os modelos, com excessão do modelo SBRF, são feitos através da biblioteca [Scikit-learn](https://scikit-learn.org/stable/). O modelo SBRF é ajustado e executado sob a liguagem de programação R, através da utilzação dos pacotes [frbs](https://cran.r-project.org/web/packages/frbs/frbs.pdf) e  [Tidyverse](https://www.tidyverse.org/).
+
+## Estrutura
+
+A execução deste projeto é dada através do arquivo *results.py*, que por sua vez carrega e executa os seguintes scrips em python, contidos no diretório "/modelling/":
+- **pre_process.py**: Rotina criada para o tratamento de dados amostrais e separação dos mesmos em cojuntos de treino e de teste.
+- **fit_models.py**: Rotina criada para ajustar modelos e gerar os resultados referentes aos seus desempenhos em predição, sob as métricas de AUC, Acurácia Balanceada, F1-score e F2-score. 
+- **run.py**: Este script carrega e executa os scripts anteriores em um conjunto de amostras. Parte deste script carrega parâmetros de modelos já hiperparametrizados, que se encontram no diretório "/Hiperparametrizados/".
+
+O arquivo *results.py* é responsável pela integração dos demais scripts, parametrização e execução dos modelos propostos (exceto o SBRF). Durante sua execução uma tabela em formato .csv é gerada, permintindo análises dos resultados parciais enquanto todo o conjunto de amostras ainda não foi finalizado. Ao fim de sua execução, uma tabela final em formato .csv é gerada com todos os resultados de todos os modelos em todas as amostras; armazeanada no diretório "/Resultados/".
 
 ## Análises
 
