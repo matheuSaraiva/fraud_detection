@@ -22,6 +22,18 @@ Os dados utilizados neste repositório são dados artificiais gerados pelo simul
 
 No script de execução *results.py* cada cenário é inserido de maneira compactada em formato .zip.
 
+## Modelos
+
+os modelos utilizados neste projeto são:
+- Regressão Logística
+- Random Forests
+- Redes Neurais Artificiais (MLP)
+- Support Vector Machine (SVM)
+- Extreme Gradiente Boosting Machine (XGB)
+- Sistemas Baseados em Regras Fuzzy (SBRF)
+
+Os ajustes, predições e avaliações de desempenho de todos os modelos, com excessão do modelo SBRF, são feitos através da biblioteca [Scikit-learn](https://scikit-learn.org/stable/). O modelo SBRF é ajustado e executado sob a liguagem de programação R, através da utilzação dos pacotes [frbs](https://cran.r-project.org/web/packages/frbs/frbs.pdf) e  [Tidyverse](https://www.tidyverse.org/).
+
 ## Análises
 
 No diretório "/Resultados/" se encontram os arquivos gerados pelo script "results.py" e o jupyter notebook "analise_inicial.ipynb" que contém uma análise de uma das amostras e também do desempenho dos modelos
