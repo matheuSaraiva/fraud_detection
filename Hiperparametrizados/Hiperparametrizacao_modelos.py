@@ -1,11 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# # Bibliotecas
-
-# In[ ]:
-
-
 import pandas as pd
 
 #Reamostragem
@@ -25,7 +17,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 
 #hiperparametrizacao
-from sklearn.pipeline import Pipeline
 from sklearn.model_selection import GridSearchCV #hiperparametrizacao
 
 #Salvar e carregar modelos treinados
@@ -34,7 +25,7 @@ from joblib import dump, load
 #Comparacao de modelos
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
-from sklearn.metrics import roc_auc_score, roc_curve, auc
+from sklearn.metrics import fbeta_score, make_scorer
 
 #timing
 from datetime import datetime
@@ -137,7 +128,9 @@ params_logit = {'penalty':['l1', 'l2', 'elasticnet'],
                 'class_weight':['balanced', None]                 
                }
 
-params_svc = {'C':[.5, 1, 3]
+params_svc = {'C':[.5, 1, 3], 
+              'kernel':['linear', 'poly', 'rbf', 'sigmoid', 'precomputed'],
+              
              }
 
 params_mlp = {'hidden_layer_sizes':[(10, ), (50,), (100, ), (150, ), (200, )],
@@ -167,8 +160,11 @@ h_params = [
 
 
 setups = []
+
+f2 = make_scorer(fbeta_score , beta=2)
+
 for m in zip(models, h_params):
-    model = GridSearchCV(estimator=m[0], param_grid=m[1], n_jobs=-1, scoring='roc_auc', verbose=2)
+    model = GridSearchCV(estimator=m[0], param_grid=m[1], n_jobs=-1, scoring=f2, verbose=2)
     setups.append(model)
 
 
@@ -195,7 +191,6 @@ for i in setups:
     print(f'Tempo de modelagem: {datetime.now() - t0}')
 
 dump(clf, 'All_models.joblib')
-
 
 
 
