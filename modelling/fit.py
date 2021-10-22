@@ -12,7 +12,8 @@ from xgboost import XGBClassifier
 from sklearn import model_selection
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
-from sklearn.metrics import roc_auc_score, balanced_accuracy_score, f1_score, fbeta_score
+from sklearn.metrics import roc_auc_score, f1_score, fbeta_score, recall_score
+import json
 
 from joblib import dump, load
 
@@ -30,11 +31,11 @@ def fit_models(X_train: pd.DataFrame,
     :return: DataFrame of predictions
     '''
     
-    metricas = [('auc',roc_auc_score),
-            ('bal_accuracy',balanced_accuracy_score),
-            ('f1_score',f1_score),
-            ('f2_score',fbeta_score)
-           ]
+#     metricas = [('auc',roc_auc_score),
+#             ('recall',recall_score),
+#             ('f1_score',f1_score),
+#             ('f2_score',fbeta_score)
+#            ]
 
 
     hipers = {'LogClass':load('Hiperparametrizados/Logi.joblib'),
@@ -55,32 +56,54 @@ def fit_models(X_train: pd.DataFrame,
 
     # Criando listas para armazenamento
     AUC = []
-    bal_acc = []
+    RECALL = []
     f1 = []
     f2 = []
     modelo = []
+    tp = []
+    tn = []
+    fp = []
+    fn = []
 
     for m in hipers:
+        print(m)
         clf = hipers[m].fit(X_train, y_train) #ajuste
         y_pred = clf.predict(X_test) #predicao
-
+        
+        cm = confusion_matrix(y_test, y_pred)
         modelo.append(m)
         
         if y_test.sum() == 0:
             AUC.append(np.nan)
-            bal_acc.append(np.nan)
+            RECALL.append(np.nan)
             f1.append(np.nan)
             f2.append(np.nan)
+            tp.append(np.nan)
+            tn.append(np.nan)
+            fp.append(np.nan)
+            fn.append(np.nan)
         else:
-            AUC.append(roc_auc_score(y_test, y_pred))
-            bal_acc.append(balanced_accuracy_score(y_test, y_pred))
+            AUC.append(roc_auc_score(y_test, y_pred, average='weighted'))
+            RECALL.append(recall_score(y_test, y_pred))
             f1.append(f1_score(y_test, y_pred))
             f2.append(fbeta_score(y_test, y_pred, beta=2))
+            tp.append(cm[1,1])
+            tn.append(cm[0,0])
+            fp.append(cm[0,1])
+            fn.append(cm[1,0])
 
+      
     df = pd.DataFrame({'AUC':AUC,
-                        'B_ACC':bal_acc,
+                        'RECALL':RECALL,
                         'F1':f1,
                         'F2':f2,
-                        'Model':modelo
+                        'TN':tn,
+                        'FN':fn,
+                        'FP':fp,
+                        'TP':tp,
+                        'MODEL':modelo
                             })
+    df['N_NEG'] = sum(y_test == 0)
+    df['N_POS'] = sum(y_test == 1)
+ 
     return df

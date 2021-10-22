@@ -41,10 +41,13 @@ def run_through_samples(cenario, over_sampling=True, prop=.2):
         print(f'{sample[:-4]}: \n tempo de modelagem: {t1-t0}')
         
         
-        this_result[['cenario/amostra']] = sample[:-4]
+        this_result['AMOSTRA'] = sample[:-4]
         
         results.append(this_result)
-        pd.concat(results, ignore_index=True).to_csv('Resultados/resultados_preliminares_cenario4.csv', index=False)
+        
+        nome = list(cenario.keys())[0]
+        nome = nome.split('/')[0] + '.csv'
+        pd.concat(results, ignore_index=True).to_csv('Resultados/resultados_preliminares_'+nome, index=False)
 
         
     final = pd.concat(results, ignore_index=True)
